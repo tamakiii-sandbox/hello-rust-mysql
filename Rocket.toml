@@ -1,0 +1,2 @@
+[global.databases.mysql]
+url = "mysql://usr:pass@mysql/hello"
