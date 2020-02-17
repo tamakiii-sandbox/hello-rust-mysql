@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS `hello` ;
+GRANT ALL ON `hello`.* TO `usr`@`%` WITH GRANT OPTION;
