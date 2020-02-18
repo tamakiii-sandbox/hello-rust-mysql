@@ -4,6 +4,8 @@ RUN apt update && apt install -y --no-install-recommends make less && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN cargo install diesel_cli
+
 # --
 
 FROM production-pseudo AS development
