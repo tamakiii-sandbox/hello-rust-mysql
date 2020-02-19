@@ -7,7 +7,7 @@ use diesel::mysql::MysqlConnection;
 pub mod schema;
 pub mod models;
 
-pub fn connect() -> MysqlConnection {
+pub fn establish_connect() -> MysqlConnection {
   let url = "mysql://usr:pass@mysql/hello";
 
   MysqlConnection::establish(url)

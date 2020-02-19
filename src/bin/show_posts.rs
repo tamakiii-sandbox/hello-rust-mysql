@@ -7,7 +7,7 @@ use tutorial::*;
 fn main() {
   use schema::posts::dsl::*;
 
-  let connection = tutorial::connect();
+  let connection = tutorial::establish_connect();
   let results = posts.filter(published.eq(true))
     .limit(5)
     .load::<models::Post>(&connection)
