@@ -28,7 +28,8 @@
 	"extensions": [
 		"rust-lang.rust",
 		"kalitaalexey.vscode-rust",
-		"bungcip.better-toml"
+		"bungcip.better-toml",
+		"panicbit.cargo"
 	]
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
