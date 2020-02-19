@@ -1,55 +1,31 @@
-#![feature(proc_macro_hygiene, decl_macro)]
+extern crate diesel;
+extern crate tutorial;
 
-#[macro_use] extern crate diesel;
-// extern crate self as show_posts;
-
-// use self::models::*;
-// use self::models::{Post};
-use tutorial::*;
-use models::{Post};
 use diesel::prelude::*;
+use diesel::mysql::MysqlConnection;
 
-fn main() {
-    // use self::schema::posts::dsl::*;
-    use schema::posts::dsl::*;
+pub fn connect() -> MysqlConnection {
+  let url = "mysql://usr:pass@mysql/hello";
 
-    let connection = establish_connection();
-    let results = posts
-        // .filter(published.eq(true))
-        .limit(5)
-        .load::<Post>(&connection)
-        .expect("Error loading posts");
-
-    println!("Displaying {} posts", results.len());
-    for post in results {
-        println!("{}", post.title);
-        println!("-----------\n");
-        println!("{}", post.body);
-    }
+  MysqlConnection::establish(url)
+    .expect(&format!("Failed to connect: {}", url))
 }
 
-// extern crate diesel_demo;
-// extern crate diesel;
+fn main() {
+  use tutorial::schema::posts::dsl::*;
+  use tutorial::models;
 
-// use self::diesel_demo::*;
-// use self::models::*;
-// use self::diesel::prelude::*;
+  let connection = connect();
+  let results = posts.filter(published.eq(true))
+    .limit(5)
+    .load::<models::Post>(&connection)
+    .expect("Error loading posts");
 
-// fn main() {
-//     use diesel_demo::schema::posts::dsl::*;
+  println!("Displaying {} posts", results.len());
 
-//     let connection = establish_connection()
-//       .expect("Failed to establish connection");
-
-//     let results = posts.filter(published.eq(true))
-//         .limit(5)
-//         .load::<Post>(&connection)
-//         .expect("Error loading posts");
-
-//     println!("Displaying {} posts", results.len());
-//     for post in results {
-//         println!("{}", post.title);
-//         println!("----------\n");
-//         println!("{}", post.body);
-//     }
-// }
+  for post in results {
+    println!("{}", post.title);
+    println!("----------------");
+    println!("{}", post.body);
+  }
+}

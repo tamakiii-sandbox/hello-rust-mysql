@@ -3,6 +3,6 @@ table! {
         id -> Integer,
         title -> Text,
         body -> Text,
-        // published -> Bool,
+        published -> Bool,
     }
 }
