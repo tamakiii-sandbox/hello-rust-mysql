@@ -1,4 +1,5 @@
 table! {
+    #[sql_name="post"]
     posts (id) {
         id -> Integer,
         title -> Text,
