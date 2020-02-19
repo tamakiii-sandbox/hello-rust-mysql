@@ -1,7 +1,8 @@
 table! {
-    post (id) {
-        id -> Unsigned<Integer>,
+    posts (id) {
+        id -> Integer,
         title -> Text,
         body -> Text,
+        // published -> Bool,
     }
 }
