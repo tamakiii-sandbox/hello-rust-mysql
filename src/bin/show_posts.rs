@@ -2,20 +2,12 @@ extern crate diesel;
 extern crate tutorial;
 
 use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-
-pub fn connect() -> MysqlConnection {
-  let url = "mysql://usr:pass@mysql/hello";
-
-  MysqlConnection::establish(url)
-    .expect(&format!("Failed to connect: {}", url))
-}
+use tutorial::*;
 
 fn main() {
-  use tutorial::schema::posts::dsl::*;
-  use tutorial::models;
+  use schema::posts::dsl::*;
 
-  let connection = connect();
+  let connection = tutorial::connect();
   let results = posts.filter(published.eq(true))
     .limit(5)
     .load::<models::Post>(&connection)
