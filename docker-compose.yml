@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  rust:
+    build:
+      context: docker/rust
+      target: ${ENVIRONMENT:-production-pseudo}
+    working_dir: /app
+    volumes:
+      - .:/app
+
+  mysql:
+    build:
+      context: docker/mysql
+      target: ${ENVIRONMENT:-production-pseudo}
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: usr
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  mysql:
